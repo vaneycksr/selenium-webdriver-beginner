@@ -2,6 +2,9 @@ package tests;
 
 // fazendo com que seja uma importacao estatica
 import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,21 +15,25 @@ import java.util.concurrent.TimeUnit;
 
 public class InformacoesUsuarioTest {
 
-    @Test
-    public void testAdicionarUmaInformacaoAdicionalDoUsuario(){
+    private WebDriver navegador;
 
+    @Before
+    public void setUp(){
         // definindo que vai usar o webdriver, e onde ele esta
         System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver");
 
         // apenas abre o navegador
-        WebDriver navegador = new ChromeDriver();
+        navegador = new ChromeDriver();
 
         // definir tempo de espera do navegador
         navegador.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         // abrindo uma pagina no browser
         navegador.get("http://www.juliodelima.com.br/taskit");
+    }
 
+    @Test
+    public void testAdicionarUmaInformacaoAdicionalDoUsuario(){
 
         // clicar no link que possui o texto "Sign In"
         navegador.findElement(By.linkText("Sign in")).click();
@@ -48,11 +55,12 @@ public class InformacoesUsuarioTest {
         String textoNoElementoMe = me.getText();
         assertEquals("Hi, Julio",textoNoElementoMe);
 
-        // fechar o navegador
-        navegador.quit();
-
-
     }
 
+    @After
+    public void tearDown(){
+        // fechar o navegador
+        navegador.quit();
+    }
 
 }
