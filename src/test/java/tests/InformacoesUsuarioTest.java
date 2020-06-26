@@ -3,10 +3,8 @@ package tests;
 // fazendo com que seja uma importacao estatica
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,12 +12,18 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import suporte.Generator;
+import suporte.Screenshot;
 
 import java.util.concurrent.TimeUnit;
 
 public class InformacoesUsuarioTest {
 
     private WebDriver navegador;
+
+    // capturando o nome do metodo de teste
+    @Rule
+    public TestName test = new TestName();
 
     @Before
     public void setUp(){
@@ -98,6 +102,12 @@ public class InformacoesUsuarioTest {
         WebElement mensagemPop = navegador.findElement(By.id("toast-container"));
         String mensagem = mensagemPop.getText();
         assertEquals("Rest in peace, dear phone!",mensagem);
+
+
+        // monta o nome do arquivo
+        String screenshotArquivo = "/home/vaneyck/Imagens/teste/" + Generator.dataHoraParaArquivo() + test.getMethodName() + ".png";
+        // tira o print e coloca em uma pasta
+        Screenshot.tirarPrintDaTela(navegador, screenshotArquivo);
 
         // Aguardar ate 10 segundos para que a janela desapareca
         WebDriverWait aguardar = new WebDriverWait(navegador,10);
