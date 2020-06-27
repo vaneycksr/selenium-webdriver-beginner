@@ -3,8 +3,12 @@ package tests;
 // fazendo com que seja uma importacao estatica
 import static org.junit.Assert.*;
 
+import org.easetech.easytest.annotation.DataLoader;
+import org.easetech.easytest.annotation.Param;
+import org.easetech.easytest.runner.DataDrivenTestRunner;
 import org.junit.*;
 import org.junit.rules.TestName;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +21,8 @@ import suporte.Screenshot;
 
 import java.util.concurrent.TimeUnit;
 
+@RunWith(DataDrivenTestRunner.class) // vai executar os testes apontando para esse biblioteca
+@DataLoader(filePaths = "InformacoesUsuarioTest.csv") // arquivo que guardara os dados do teste (esse arquivo vai estar em src/test/resources)
 public class InformacoesUsuarioTest {
 
     private WebDriver navegador;
@@ -61,8 +67,10 @@ public class InformacoesUsuarioTest {
         navegador.findElement(By.linkText("MORE DATA ABOUT YOU")).click();
     }
 
-    @Ignore
-    public void testAdicionarUmaInformacaoAdicionalDoUsuario(){
+    @Test                             // informando que os dados utilizados, sao os da coluna do csv
+    public void testAdicionarUmaInformacaoAdicionalDoUsuario(@Param(name="tipo")String tipo,
+                                                             @Param(name="contato")String contato,
+                                                             @Param(name = "mensagem")String mensagemEsperada){
 
         // clicar no botao atraves do seu xpath //button[@data-target="addmoredata"]
         //navegador.findElement(By.cssSelector("button[data-target='addmoredata']")).click(); // usando cssSelector
@@ -73,10 +81,10 @@ public class InformacoesUsuarioTest {
 
         // na combo de name "type" escolhe a opcao "Phone" (pelo nome da opcao)
         WebElement campoType = popupAddMoreData.findElement(By.name("type")); // capturei o combobox
-        new Select(campoType).selectByVisibleText("Phone");
+        new Select(campoType).selectByVisibleText(tipo); // substitui pelo parametro da coluna do csv
 
         // no campo de name "contact" digitar "+55839999912"
-        popupAddMoreData.findElement(By.name("contact")).sendKeys("+55839999912");
+        popupAddMoreData.findElement(By.name("contact")).sendKeys(contato);
 
         // clicar no link de text "SAVE" que esta na popup
         popupAddMoreData.findElement(By.linkText("SAVE")).click();
@@ -84,11 +92,11 @@ public class InformacoesUsuarioTest {
         // na mensagem de id "toast-container" validar que o texto eh "Your contact has been added!"
         WebElement mensagemPop = navegador.findElement(By.id("toast-container")); // capturei o toast
         String mensagem = mensagemPop.getText();
-        assertEquals("Your contact has been added!", mensagem);
+        assertEquals(mensagemEsperada, mensagem);
 
     }
 
-    @Test
+    @Ignore
     public void testRemoverUmContatoDeUmUsuario(){
         // o telefone que vai ser removido, ja tem que esta adicionado no sistema
         // /following-sibling::a -> a partir do elemento anterior pega o proximo "a"
