@@ -1,6 +1,6 @@
-testAdicionarUmaInformacaoAdicionalDoUsuario,tipo,contato,mensagem,Duration(ms)
-"",Phone,+558396584220,Your contact has been added!,782.0
-"",Phone,+558396584221,Your contact has been added!,720.0
-"",Phone,+558396584222,Your contact has been added!,797.0
-"",E-mail,van1@teste.com,Your contact has been added!,732.0
-"",E-mail,van2@teste.com,Your contact has been added!,703.0
+testAdicionarUmaInformacaoAdicionalDoUsuario,tipo,contato,mensagem,Duration(ms),Duration(ms)
+"",Phone,+558396584220,Your contact has been added!,836.0,836.0
+"",Phone,+558396584221,Your contact has been added!,750.0,750.0
+"",Phone,+558396584222,Your contact has been added!,804.0,804.0
+"",E-mail,van1@teste.com,Your contact has been added!,840.0,840.0
+"",E-mail,van2@teste.com,Your contact has been added!,807.0,807.0

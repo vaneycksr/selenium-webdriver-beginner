@@ -18,10 +18,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import suporte.Generator;
 import suporte.Screenshot;
+import suporte.Web;
 
 import java.util.concurrent.TimeUnit;
 
-@RunWith(DataDrivenTestRunner.class) // vai executar os testes apontando para esse biblioteca
+@RunWith(DataDrivenTestRunner.class) // vai executar os testes apontando para essa biblioteca
 @DataLoader(filePaths = "InformacoesUsuarioTest.csv") // arquivo que guardara os dados do teste (esse arquivo vai estar em src/test/resources)
 public class InformacoesUsuarioTest {
 
@@ -33,17 +34,8 @@ public class InformacoesUsuarioTest {
 
     @Before
     public void setUp(){
-        // definindo que vai usar o webdriver, e onde ele esta
-        System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver");
 
-        // apenas abre o navegador
-        navegador = new ChromeDriver();
-
-        // definir tempo de espera do navegador
-        navegador.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-        // abrindo uma pagina no browser
-        navegador.get("http://www.juliodelima.com.br/taskit");
+        navegador = Web.creatChrome();
 
         // clicar no link que possui o texto "Sign In"
         navegador.findElement(By.linkText("Sign in")).click();
