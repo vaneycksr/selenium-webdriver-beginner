@@ -22,8 +22,11 @@ public class InformacoesUsuarioPageObjectsTest {
 
         // instancia a page que sera testada
         new LoginPage(navegador)
-                .clickSign()
-                .typeLogin("julio0001");
+                .clicarSign()
+                .fazerLogin("julio0001","123456")
+                .clicarMe()
+                .clicarAbaMoreDataAboutYou()
+                .clicarBotaoAddMoreDataAboutYou();
     }
 
     @After
