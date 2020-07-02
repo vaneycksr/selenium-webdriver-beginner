@@ -23,7 +23,7 @@ import suporte.Web;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(DataDrivenTestRunner.class) // vai executar os testes apontando para essa biblioteca
-@DataLoader(filePaths = "InformacoesUsuarioTest.csv") // arquivo que guardara os dados do teste (esse arquivo vai estar em src/test/resources)
+@DataLoader(filePaths = "InformacoesUsuarioTest.csv") // arquivo que guardara os dados do teste (esse arquivo vai estar em src/test/resources) e geralmente o nome do arquivo eh o nome da classe
 public class InformacoesUsuarioTest {
 
     private WebDriver navegador;
