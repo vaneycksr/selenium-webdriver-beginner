@@ -32,6 +32,12 @@
             <version>1.4.0</version>
         </dependency>
 
+        <!-- necessario esse dependecia para executar os testes com o java 11 -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+        </dependency>
 
     </dependencies>
 
@@ -41,10 +47,5 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <!-- necessario esse dependecia para executar os testes com o java 11 -->
-    <dependency>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-    </dependency>
+
 </project>
